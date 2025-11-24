@@ -1,91 +1,53 @@
+# 🎨 Project Description
 
-## Casper's Redesign
-!! NOT DONE W.I.P !!
+**All credit goes to Casper and his inital resdesign. I've either made things worst or better, lol.**
 
-This redesign is a work in progress, released so that people can continue working on it. I have added a custom shop system as prod, and a crafting system (work in progress).
-Use common sense, and feel free to join my Discord so we can share ideas and create more things together.
+This redesigned version of **ox_inventory** is an active **work in progress**, released early so the community can continue improving, expanding, and polishing it. It builds on Casper’s original redesign while fixing multiple issues, improving stability, and introducing new features across the UI and core logic.
 
-Do not resell, I have chosen to make it available to everyone so you don't have to pay a lot for a redesign that doesn't even work.
-Remember to build the inventory before use, otherwise it's just plug n' play. (few items have been added)
+A fully custom **shop system** (production-ready) has been added, along with a new **crafting system** that is currently under development. Additional improvements, bug fixes, and quality-of-life features will continue to roll out as the project evolves.
 
-https://discord.gg/mjXCDRJ2hf
+Use common sense, contribute responsibly, and feel free to join my Discord so we can share ideas, collaborate, and create more systems together.
 
-Credits:
-legacy, spunK(wut) & emptyy
+This project is **free** and will remain free.  
+**Do not resell** this resource. It is released publicly so people don’t have to overpay for redesigns — especially ones that are broken, outdated, or poorly maintained.
 
-## Missing items & bugs
+Before using the UI, make sure to **build the inventory** unless you are using the pre-built version included. Most features are plug-and-play, and a few example items have been added to help you get started quickly.
 
-- Crafting (ui is done) - feel free to fork and make crafting so we can all enjoy it. :)
-- Utility (ui is done) - feel free to fork and make crafting so we can all enjoy it. :)
-- Searchbar may have a problem with movement.
+---
 
-- Target error inside client.lua with limitless-targeting (convert it to ox_target)
-- Delete all items if you get errors and make your own.
-- If there are more errors, as this version is for a custom framework, please let us know.
+# 📌 Project Status 
 
-## ✨ Features
+## 🚧 Work in Progress 
 
-- Drag n' Drop shop.
-- Custom crafting system (wip)
-- Inspired and perfected design.
-- Rarity system.
-- Utility System (ui only so far) -hidden.
+Features currently being developed, tested, or refined. 
 
-## In modules/shops.lua - line 165-201:
-Change this code to your frameworks.
+- [ ] Finalize Split Control
+- [ ] Rework Crafting + Crafting Inventory
 
-```ruby
-local function canAffordItem(inv, currency, price)
-    if price < 0 then
-        return {
-            type = 'error',
-            description = locale('cannot_afford', 'invalid price')
-        }
-    end
+--- 
 
-    if currency == 'cash' then
-        local count = Inventory.GetItemCount(inv, 'money')
-        if count >= price then return true end
+## 📝 Planned / Not Started 
 
-        return {
-            type = 'error',
-            description = locale('cannot_afford', locale('$') .. math.groupdigits(price))
-        }
-    elseif currency == 'bank' then
-        local user = exports['limitless-core']:getComponent('User'):GetPlayer(inv.id)
-        if user and user.bank >= price then return true end
+Ideas, future additions, or upcoming improvements. 
 
-        return {
-            type = 'error',
-            description = locale('cannot_afford', math.groupdigits(price) .. ' Bank')
-        }
-	end
-end
+- [ ] Add hotbar section when viewing another person inventory
 
-local function removeCurrency(inv, currency, amount)
-    if currency == 'money' then
-        Inventory.RemoveItem(inv, 'money', amount)
-    elseif currency == 'bank' then
-        local user = exports['limitless-core']:getComponent('User'):GetPlayer(inv.id)
-        if user then
-            user.removeBank(amount)
-        end
-    end
-end
-```
+--- 
 
-![Nyt Projekt (1)](https://github.com/user-attachments/assets/623ebd2a-7a14-416b-818e-d8d1a8da7a25)
+## ✅ Completed 
+Implemented, tested, and stable features.
 
-## 📚 Documentation
+- [x] Added Slot Restrictions
+- [x] Fixed Utility Inventory
+- [x] Added Backpack Inventory
+- [x] Reworked Storage Inventory
 
-https://overextended.dev/ox_inventory
+## 📚 Documentation 
 
-## Copyright
+https://coxdocs.dev/ox_inventory 
 
-Copyright © 2024 Overextended <https://github.com/overextended>
+## Copyright 
 
-This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+Copyright © 2024 Overextended <https://github.com/overextended> 
 
-This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License along with this program. If not, see <https://www.gnu.org/licenses/>.
+This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version. This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details. You should have received a copy of the GNU General Public License along with this program. If not, see <https://www.gnu.org/licenses/>.
