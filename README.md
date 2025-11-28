@@ -17,7 +17,6 @@
 > [!TIP]
 > These features have not yet been started or implentmented.
 
-- [ ] Fix the search query causing the user to walk
 - [ ] Add hotbar section when viewing another person inventory
 
 --- 
@@ -31,6 +30,7 @@
 - [x] Added Backpack Inventory
 - [x] Reworked Storage Inventory
 - [x] Finalize Split Control
+- [x] Fixed walking while searching
 
 --- 
 
