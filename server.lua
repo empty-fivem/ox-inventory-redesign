@@ -719,6 +719,63 @@ RegisterCommand('convertinventory', function(source, args)
     CreateThread(convert)
 end, true)
 
+lib.addCommand({'additem', 'giveitem'}, {
+	help = 'Gives an item to a player with the given id',
+	params = {
+		{ name = 'target', type = 'playerId', help = 'The player to receive the item' },
+		{ name = 'item', type = 'string', help = 'The name of the item' },
+		{ name = 'count', type = 'number', help = 'The amount of the item to give', optional = true },
+		{ name = 'type', help = 'Sets the "type" metadata to the value', optional = true },
+	},
+	restricted = 'group.admin',
+}, function(source, args)
+	local item = Items(args.item)
+
+	if item then
+		local inventory = Inventory(args.target) --[[@as OxInventory]]
+		local count = args.count or 1
+		local success, response = Inventory.AddItem(inventory, item.name, count, args.type and { type = tonumber(args.type) or args.type })
+
+		if not success then
+			return Citizen.Trace(('Failed to give %sx %s to player %s (%s)'):format(count, item.name, args.target, response))
+		end
+
+		source = Inventory(source) or { label = 'console', owner = 'console' }
+
+		if server.loglevel > 0 then
+			lib.logger(source.owner, 'admin', ('"%s" gave %sx %s to "%s"'):format(source.label, count, item.name, inventory.label))
+		end
+	end
+end)
+
+lib.addCommand('removeitem', {
+	help = 'Removes an item to a player with the given id',
+	params = {
+		{ name = 'target', type = 'playerId', help = 'The player to remove the item from' },
+		{ name = 'item', type = 'string', help = 'The name of the item' },
+		{ name = 'count', type = 'number', help = 'The amount of the item to take' },
+		{ name = 'type', help = 'Only remove items with a matching metadata "type"', optional = true },
+	},
+	restricted = 'group.admin',
+}, function(source, args)
+	local item = Items(args.item)
+
+	if item and args.count > 0 then
+		local inventory = Inventory(args.target) --[[@as OxInventory]]
+		local success, response = Inventory.RemoveItem(inventory, item.name, args.count, args.type and { type = tonumber(args.type) or args.type }, nil, true)
+
+		if not success then
+			return Citizen.Trace(('Failed to remove %sx %s from player %s (%s)'):format(args.count, item.name, args.target, response))
+		end
+
+		source = Inventory(source) or {label = 'console', owner = 'console'}
+
+		if server.loglevel > 0 then
+			lib.logger(source.owner, 'admin', ('"%s" removed %sx %s from "%s"'):format(source.label, args.count, item.name, inventory.label))
+		end
+	end
+end)
+
 lib.addCommand('setitem', {
     help = 'Sets the item count for a player, removing or adding as needed',
     params = {
