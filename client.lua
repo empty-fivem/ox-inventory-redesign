@@ -677,7 +677,7 @@ local function useSlot(slot, noAnim)
             if durability <= 0 then
                 return lib.notify({ type = 'error', description = locale('no_durability', label) })
             elseif consume ~= 0 and consume < 1 and durability < consume * 100 then
-                eturn lib.notify({ type = 'error', description = locale('not_enough_durability', label) })
+                return lib.notify({ type = 'error', description = locale('not_enough_durability', label) })
             end
         end
 
