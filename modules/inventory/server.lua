@@ -112,6 +112,14 @@ local function loadInventoryData(data, player, ignoreSecurityChecks)
         end
     end
 
+    if (data.type == 'trunk' or data.type == 'glovebox') and not data.id and data.netid then
+        local entity = NetworkGetEntityFromNetworkId(data.netid)
+        if entity then
+            local plate = GetVehicleNumberPlateText(entity) or "UNKNOWN"
+            data.id = ("%s%s"):format(data.type == "trunk" and "trunk" or "glove", plate)
+        end
+    end
+
     if data.type == 'trunk' or data.type == 'glovebox' then
         local plate = data.id:sub(6)
 
