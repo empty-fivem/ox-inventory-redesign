@@ -133,6 +133,44 @@ RegisterNUICallback('toggleAudio', function(data, cb)
     cb('ok')
 end)
 
+local freezeThread = nil
+local shouldFreeze = false
+RegisterNuiCallback("thisfuckingsucks", function(data, cb)
+    shouldFreeze = true
+
+    if not freezeThread then
+        freezeThread = CreateThread(function()
+            while shouldFreeze do
+                Wait(0)
+
+                DisableControlAction(0, 1, true)
+                DisableControlAction(0, 2, true)
+                DisableControlAction(0, 30, true)
+                DisableControlAction(0, 31, true)
+                DisableControlAction(0, 21, true)
+                DisableControlAction(0, 22, true)
+                DisableControlAction(0, 24, true)
+                DisableControlAction(0, 25, true)
+                DisableControlAction(0, 75, true)
+                DisableControlAction(0, 140, true)
+                DisableControlAction(0, 141, true)
+                DisableControlAction(0, 142, true)
+            end
+
+            freezeThread = nil
+        end)
+    end
+
+    cb("ok")
+end)
+
+RegisterNuiCallback("lolthisisstupid", function(data, cb)
+    shouldFreeze = false
+    SetNuiFocusKeepInput(false)
+
+    cb("ok")
+end)
+
 local plyState = LocalPlayer.state
 local IsPedCuffed = IsPedCuffed
 local playerPed = cache.ped
