@@ -17,6 +17,8 @@
 > [!TIP]
 > These features have not yet been started or implentmented.
 
+- [ ] Make it so when armor is in the armor slot, it is equipped
+- [ ] Make it so when a parachute is inside of the parachute slot, it equips the parachute
 - [ ] Add hotbar section when viewing another person inventory
 
 --- 
