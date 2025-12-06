@@ -70,7 +70,10 @@ const InventoryGrid: React.FC<InventoryGridProps> = ({
     if (inventory.type === InventoryType.SHOP) {
       return slotsToShow;
     }
-    return slotsToShow.slice(9, Math.min((page + 1) * PAGE_SIZE, slotsToShow.length));
+    return slotsToShow.slice(
+      0,
+      Math.min((page + 1) * PAGE_SIZE, slotsToShow.length)
+    );
   }, [slotsToShow, inventory.type, page]);
 
   const normalizedQuery = toAsciiLower(searchQuery);
